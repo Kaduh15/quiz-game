@@ -5,11 +5,11 @@ const initialState = {
   gravatarEmail: '',
 };
 
-const loginReducer = (state = initialState, action) => {
+const playerReducer = (state = initialState, action) => {
   switch (action.type) {
   default:
     return state;
   }
 };
 
-export default loginReducer;
+export default playerReducer;
