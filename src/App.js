@@ -1,17 +1,18 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import './App.css';
 import Login from './Pages/Login';
+import Jogo from './Pages/Jogo';
 
 class App extends React.Component {
   render() {
     return (
-      <div className="App">
-        <Switch>
-          <Route exact path="/" component={ Login } />
-        </Switch>
-      </div>
+
+      <Switch>
+        <Route exact path="/" component={ Login } />
+        <Route path="/jogo" component={ Jogo } />
+      </Switch>
+
     );
   }
 }
