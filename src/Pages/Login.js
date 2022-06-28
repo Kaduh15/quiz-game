@@ -34,7 +34,7 @@ handlesubmit = async (e) => {
   e.preventDefault();
   const token = await this.fetchToken();
   this.setState({ loading: false }, () => {
-    localStorage.setItem('token', JSON.stringify(token));
+    localStorage.setItem('token', token);
     this.setState({ loading: true });
   });
 
