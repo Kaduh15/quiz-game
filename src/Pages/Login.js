@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import logo from '../trivia.png';
 import '../App.css';
+import { addNameEmail } from '../Redux/Actions';
 
 class Login extends React.Component {
   state = { name: '', email: '', isDisabeledButton: true };
@@ -28,12 +31,13 @@ class Login extends React.Component {
   };
 
   handlesubmit = async (e) => {
-    const { history } = this.props;
+    const { history, dispatch } = this.props;
     e.preventDefault();
     const token = await this.fetchToken();
     localStorage.setItem('token', token);
 
     history.push('/jogo');
+    dispatch(addNameEmail({ ...this.state }));
   };
 
   render() {
@@ -84,6 +88,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
   history: PropTypes.node.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default Login;
+export default connect()(Login);
