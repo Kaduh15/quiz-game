@@ -5,6 +5,7 @@ import Login from './Pages/Login';
 import Jogo from './Pages/Jogo';
 import Config from './Pages/Config';
 import Feedback from './Pages/Feedback';
+import Ranking from './Pages/Ranking';
 
 class App extends React.Component {
   render() {
@@ -15,6 +16,7 @@ class App extends React.Component {
         <Route path="/jogo" component={ Jogo } />
         <Route path="/config" component={ Config } />
         <Route path="/feedback" component={ Feedback } />
+        <Route path="/ranking" component={ Ranking } />
       </Switch>
 
     );
