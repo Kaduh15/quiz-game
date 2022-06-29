@@ -22,6 +22,7 @@ class Jogo extends React.Component {
 
   componentDidUpdate() {
     const { time } = this.state;
+    clearTimeout(this.a);
     this.handleTime(time);
   }
 
@@ -29,23 +30,30 @@ class Jogo extends React.Component {
     if (time === 0) {
       this.setState({ buttonClicked: true, time: -1 });
     } else if (time > 0 && time <= TIME) {
-      setTimeout(() => {
+      const a = setTimeout(() => {
         this.setState({ time: time - 1 });
       }, ONE_SECOND_IN_MILLISECONDS);
+      this.a = a;
+      console.log(a);
     }
   }
 
   handleClick = () => {
-    const number = 5;
+    const number = 4;
+    const { history } = this.props;
     const { questNumber } = this.state;
-    this.setState(
-      {
-        questNumber: questNumber === number ? 0 : questNumber + 1,
-        buttonClicked: false,
-        time: TIME,
-      },
-      () => this.randomAnswer(),
-    );
+    if (questNumber !== number) {
+      this.setState(
+        {
+          questNumber: questNumber + 1,
+          buttonClicked: false,
+          time: TIME,
+        },
+        () => this.randomAnswer(),
+      );
+    } else {
+      history.push('./feedback');
+    }
   };
 
   randomAnswer = () => {
@@ -79,7 +87,7 @@ class Jogo extends React.Component {
   };
 
   changeDisabledButton = () => {
-    this.setState((state) => ({ buttonClicked: !state.stabuttonClicked }));
+    this.setState((state) => ({ buttonClicked: !state.stabuttonClicked, time: TIME }));
   };
 
   render() {
