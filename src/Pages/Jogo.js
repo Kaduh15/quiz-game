@@ -9,6 +9,7 @@ class Jogo extends React.Component {
     quests: [],
     answerRandom: [],
     questNumber: 0,
+    buttonClicked: false,
   }
 
   async componentDidMount() {
@@ -19,7 +20,8 @@ class Jogo extends React.Component {
     const number = 5;
     const { questNumber } = this.state;
     this.setState({ questNumber: questNumber === number
-      ? 0 : questNumber + 1 }, () => this.randomAnswer());
+      ? 0 : questNumber + 1,
+    buttonClicked: false }, () => this.randomAnswer());
   }
 
   randomAnswer = () => {
@@ -52,16 +54,32 @@ class Jogo extends React.Component {
     return json?.results;
   }
 
+  changeDisabledButton = () => {
+    this.setState((state) => ({ buttonClicked: !state.stabuttonClicked }));
+  }
+
   render() {
-    const { quests, questNumber, answerRandom } = this.state;
+    const { quests, questNumber, answerRandom, buttonClicked } = this.state;
     return (
       <>
         <Header />
         <h1>Jogo</h1>
         {quests?.length > 0 && (
-          <Quest { ...quests[questNumber] } answerRandom={ answerRandom } />
+          <Quest
+            { ...quests[questNumber] }
+            answerRandom={ answerRandom }
+            buttonClicked={ buttonClicked }
+            changeDisabledButton={ this.changeDisabledButton }
+          />
         )}
-        <button type="button" onClick={ this.handleClick }>Próxima</button>
+        {buttonClicked && (
+          <button
+            type="button"
+            onClick={ this.handleClick }
+          >
+            Próxima
+
+          </button>)}
         {console.log(quests)}
       </>
     );
