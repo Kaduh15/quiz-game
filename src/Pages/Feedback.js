@@ -12,7 +12,6 @@ class Feedback extends React.Component {
 
   handleClick = (path) => {
     const { history, dispatch } = this.props;
-    //if (!history) return;
     history.push(path);
     dispatch(resetScore());
   }
