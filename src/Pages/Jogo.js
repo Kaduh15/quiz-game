@@ -76,11 +76,11 @@ class Jogo extends React.Component {
           <button
             type="button"
             onClick={ this.handleClick }
+            data-testid="btn-next"
           >
             Próxima
 
           </button>)}
-        {console.log(quests)}
       </>
     );
   }
