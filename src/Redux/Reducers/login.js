@@ -1,4 +1,4 @@
-import { ADD_NAME_EMAIL } from '../Actions';
+import { ADD_NAME_EMAIL, INCREMENT_SCORE } from '../Actions';
 
 const initialState = {
   name: '',
@@ -15,6 +15,8 @@ const loginReducer = (state = initialState, action) => {
       gravatarEmail: action.payload.email,
       name: action.payload.name,
     };
+  case INCREMENT_SCORE:
+    return { ...state, score: action.payload ? state.score + 1 : state.score };
   default:
     return state;
   }

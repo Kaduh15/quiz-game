@@ -51,20 +51,28 @@ class Login extends React.Component {
         </header>
         <main>
           <form onSubmit={ this.handlesubmit }>
-            <input
-              name="name"
-              value={ name }
-              onChange={ this.handleChange }
-              type="text"
-              data-testid="input-player-name"
-            />
-            <input
-              value={ email }
-              onChange={ this.handleChange }
-              name="email"
-              type="email"
-              data-testid="input-gravatar-email"
-            />
+            <label htmlFor="name">
+              Nome:
+              <input
+                name="name"
+                id="name"
+                value={ name }
+                onChange={ this.handleChange }
+                type="text"
+                data-testid="input-player-name"
+              />
+            </label>
+            <label htmlFor="email">
+              Email:
+              <input
+                id="email"
+                value={ email }
+                onChange={ this.handleChange }
+                name="email"
+                type="email"
+                data-testid="input-gravatar-email"
+              />
+            </label>
             <button
               type="submit"
               data-testid="btn-play"
@@ -77,7 +85,7 @@ class Login extends React.Component {
               data-testid="btn-settings"
               onClick={ () => history.push('/config') }
             >
-              Configuração
+              Configurações
             </button>
           </form>
         </main>
