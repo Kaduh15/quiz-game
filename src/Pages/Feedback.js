@@ -22,7 +22,7 @@ class Feedback extends React.Component {
     return (
       <>
         <Header />
-        <div data-testid="feedback-text">
+        <div>
           <h1>Feedback</h1>
           <main>
             <p data-testid="feedback-text">
@@ -65,7 +65,7 @@ const mapStateToProps = ({ player }) => ({
 Feedback.propTypes = {
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
-  history: PropTypes.node.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
   dispatch: PropTypes.func.isRequired,
 
 };

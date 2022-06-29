@@ -46,7 +46,6 @@ class Jogo extends React.Component {
         this.setState({ time: time - 1 });
       }, ONE_SECOND_IN_MILLISECONDS);
       this.a = a;
-      console.log(a);
     }
   }
 
@@ -71,7 +70,6 @@ class Jogo extends React.Component {
   randomAnswer = () => {
     const { quests, questNumber } = this.state;
     if (!quests) return;
-    // console.log(quests[questNumber]);
     const number = 0.5;
 
     const {
@@ -81,7 +79,6 @@ class Jogo extends React.Component {
 
     const answers = [correctAnswer, ...incorrectAnswer];
     answers.sort(() => Math.random() - number);
-    // console.log(answers);
     this.setState({ answerRandom: answers });
   };
 
