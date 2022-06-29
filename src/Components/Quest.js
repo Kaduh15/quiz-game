@@ -6,22 +6,6 @@ import { incrementScore } from '../Redux/Actions';
 import './Quest.css';
 
 class Quest extends Component {
-  // state = {
-  //    time: 30,
-  //   buttonClicked: false,
-  // }
-
-  // componentDidUpdate() {
-  //   const { time } = this.state;
-  //   if (time === 0) {
-  //     this.setState({ time: 30 });
-  //   } else {
-  //     setTimeout(() => {
-  //       this.setState({ time: time - 1 });
-  //     }, 1000);
-  //   }
-  // }
-
   checkAnswer = (answer, correctAnswer) => answer === correctAnswer;
 
   changeClassColor = (answer, correctAnswer) => {
@@ -42,8 +26,6 @@ class Quest extends Component {
       correct_answer: correctAnswer,
       dispatch,
       buttonClicked, changeDisabledButton } = this.props;
-    // const { time } = this.state;
-    // const { buttonClicked } = this.state;
     return (
       <div>
         <p data-testid="question-category">{category}</p>
@@ -67,7 +49,6 @@ class Quest extends Component {
             </button>
           ))}
         </div>
-        {/* {time} */}
       </div>
     );
   }

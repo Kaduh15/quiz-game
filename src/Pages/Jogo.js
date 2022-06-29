@@ -4,25 +4,49 @@ import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 import Quest from '../Components/Quest';
 
+const ONE_SECOND_IN_MILLISECONDS = 1000;
+const TIME = 30;
+
 class Jogo extends React.Component {
   state = {
     quests: [],
     answerRandom: [],
     questNumber: 0,
     buttonClicked: false,
-  }
+    time: TIME,
+  };
 
   async componentDidMount() {
     this.setState({ quests: await this.getQuests() }, () => this.randomAnswer());
   }
 
+  componentDidUpdate() {
+    const { time } = this.state;
+    this.handleTime(time);
+  }
+
+  handleTime = (time) => {
+    if (time === 0) {
+      this.setState({ buttonClicked: true, time: -1 });
+    } else if (time > 0 && time <= TIME) {
+      setTimeout(() => {
+        this.setState({ time: time - 1 });
+      }, ONE_SECOND_IN_MILLISECONDS);
+    }
+  }
+
   handleClick = () => {
     const number = 5;
     const { questNumber } = this.state;
-    this.setState({ questNumber: questNumber === number
-      ? 0 : questNumber + 1,
-    buttonClicked: false }, () => this.randomAnswer());
-  }
+    this.setState(
+      {
+        questNumber: questNumber === number ? 0 : questNumber + 1,
+        buttonClicked: false,
+        time: TIME,
+      },
+      () => this.randomAnswer(),
+    );
+  };
 
   randomAnswer = () => {
     const { quests, questNumber } = this.state;
@@ -37,9 +61,9 @@ class Jogo extends React.Component {
 
     const answers = [correctAnswer, ...incorrectAnswer];
     answers.sort(() => Math.random() - number);
-    console.log(answers);
+    // console.log(answers);
     this.setState({ answerRandom: answers });
-  }
+  };
 
   getQuests = async () => {
     const token = localStorage?.getItem('token');
@@ -52,14 +76,14 @@ class Jogo extends React.Component {
       return history.push('/');
     }
     return json?.results;
-  }
+  };
 
   changeDisabledButton = () => {
     this.setState((state) => ({ buttonClicked: !state.stabuttonClicked }));
-  }
+  };
 
   render() {
-    const { quests, questNumber, answerRandom, buttonClicked } = this.state;
+    const { quests, questNumber, answerRandom, buttonClicked, time } = this.state;
     return (
       <>
         <Header />
@@ -79,8 +103,9 @@ class Jogo extends React.Component {
             data-testid="btn-next"
           >
             Próxima
-
-          </button>)}
+          </button>
+        )}
+        {!buttonClicked && <div>{time}</div>}
       </>
     );
   }
