@@ -81,7 +81,6 @@ class Jogo extends React.Component {
             Próxima
 
           </button>)}
-        {console.log(quests)}
       </>
     );
   }
