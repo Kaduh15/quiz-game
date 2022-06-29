@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import md5 from 'crypto-js/md5';
+import { connect } from 'react-redux';
 import Header from '../Components/Header';
 import Quest from '../Components/Quest';
 
@@ -24,6 +25,17 @@ class Jogo extends React.Component {
     const { time } = this.state;
     clearTimeout(this.a);
     this.handleTime(time);
+  }
+
+  componentWillUnmount() {
+    const { nome, email, score } = this.props;
+    const hash = md5(email).toString();
+    const rankings = JSON.parse(localStorage?.getItem('ranking'));
+    if (!rankings) {
+      localStorage.setItem('ranking', JSON.stringify([{ name: nome, score, picture: `https://www.gravatar.com/avatar/${hash}` }]));
+    } else {
+      localStorage.setItem('ranking', JSON.stringify([...rankings, { name: nome, score, picture: `https://www.gravatar.com/avatar/${hash}` }]));
+    }
   }
 
   handleTime = (time) => {
@@ -119,8 +131,17 @@ class Jogo extends React.Component {
   }
 }
 
+const mapStateToProps = ({ player }) => ({
+  score: player.score,
+  email: player.gravatarEmail,
+  nome: player.name,
+});
+
 Jogo.propTypes = {
   history: PropTypes.node.isRequired,
+  nome: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
 };
 
-export default Jogo;
+export default connect(mapStateToProps)(Jogo);

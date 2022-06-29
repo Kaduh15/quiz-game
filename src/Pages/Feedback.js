@@ -1,12 +1,19 @@
 import React from 'react';
+
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
+import { resetScore } from '../Redux/Actions';
 
 class Feedback extends React.Component {
+  // componentDidMount() {
+
+  // }
+
   handleClick = (path) => {
-    const { history } = this.props;
+    const { history, dispatch } = this.props;
     history.push(path);
+    dispatch(resetScore());
   }
 
   render() {
@@ -51,13 +58,15 @@ class Feedback extends React.Component {
 const mapStateToProps = ({ player }) => ({
   score: player.score,
   assertions: player.assertions,
+  email: player.gravatarEmail,
+  nome: player.name,
 });
 
 Feedback.propTypes = {
-
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
   history: PropTypes.node.isRequired,
-};
+  dispatch: PropTypes.func.isRequired,
 
+};
 export default connect(mapStateToProps)(Feedback);
