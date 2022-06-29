@@ -15,7 +15,7 @@ class Feedback extends React.Component {
     return (
       <>
         <Header />
-        <div data-testid="feedback-text">
+        <div>
           <h1>Feedback</h1>
           <main>
             <p data-testid="feedback-text">

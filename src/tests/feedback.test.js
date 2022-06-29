@@ -1,0 +1,49 @@
+import React from 'react';
+import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
+import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux'
+import Feedback from '../Pages/Feedback';
+describe('Testando se a paǵina "Feedback"...',() => {
+    test('Verifica elementos do header', () => {
+      renderWithRouterAndRedux(<Feedback />);
+      const profilePicture = screen.getByTestId('header-profile-picture');
+      const totalScore = screen.getByTestId('feedback-total-score');
+      const totalQuestion = screen.getByTestId('feedback-total-question');
+
+      expect(profilePicture).toBeInTheDocument()
+      expect(totalScore).toBeInTheDocument()
+      expect(totalQuestion).toBeInTheDocument()
+    });
+    test('Verifica elementos do main', () => {
+      renderWithRouterAndRedux(<Feedback />);
+      const feedBacktitle = screen.getByRole('heading', { name: /feedback/i });
+      const feedbackText = screen.getByTestId('feedback-text');
+      const feedbackTotalScore = screen.getByTestId('feedback-total-score');
+      const feedbackTotalQuestion = screen.getByTestId('feedback-total-question');
+
+      expect(feedBacktitle).toBeInTheDocument();
+      expect(feedbackText).toBeInTheDocument();
+      expect(feedbackTotalScore).toBeInTheDocument();
+      expect(feedbackTotalQuestion).toBeInTheDocument();
+    });
+
+    test('Verifica botão playAgain', () => {
+      const { history } = renderWithRouterAndRedux(<Feedback />);
+      const buttonPlayAgain = screen.getByTestId('btn-play-again');
+
+      expect(buttonPlayAgain).toBeInTheDocument();
+
+      userEvent.click(buttonPlayAgain);
+      expect(history.location.pathname).toBe('/');
+    });
+
+    test('Verifica botão Ranking', () => {
+      const { history } = renderWithRouterAndRedux(<Feedback />);
+      const buttonRanking = screen.getByTestId('btn-ranking');
+
+      expect(buttonRanking).toBeInTheDocument();
+
+      userEvent.click(buttonRanking);
+      expect(history.location.pathname).toBe('/ranking');
+    });
+})
