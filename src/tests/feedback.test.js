@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { screen } from '@testing-library/react';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux'
 import Feedback from '../Pages/Feedback';
+import App from '../App';
+
 describe('Testando se a paǵina "Feedback"...',() => {
     test('Verifica elementos do header', () => {
       renderWithRouterAndRedux(<Feedback />);
@@ -28,7 +30,8 @@ describe('Testando se a paǵina "Feedback"...',() => {
     });
 
     test('Verifica botão playAgain', () => {
-      const { history } = renderWithRouterAndRedux(<Feedback />);
+      const { history } = renderWithRouterAndRedux(<App />);
+      history.push('/feedback');
       const buttonPlayAgain = screen.getByTestId('btn-play-again');
 
       expect(buttonPlayAgain).toBeInTheDocument();
@@ -37,13 +40,14 @@ describe('Testando se a paǵina "Feedback"...',() => {
       expect(history.location.pathname).toBe('/');
     });
 
-    test('Verifica botão Ranking', () => {
-      const { history } = renderWithRouterAndRedux(<Feedback />);
-      const buttonRanking = screen.getByTestId('btn-ranking');
+    test('Verifica botão playAgain', () => {
+      const { history } = renderWithRouterAndRedux(<App />);
+      history.push('/feedback');
+      const buttonRaking = screen.getByTestId('btn-ranking');
 
-      expect(buttonRanking).toBeInTheDocument();
+      expect(buttonRaking).toBeInTheDocument();
 
-      userEvent.click(buttonRanking);
+      userEvent.click(buttonRaking);
       expect(history.location.pathname).toBe('/ranking');
     });
 })

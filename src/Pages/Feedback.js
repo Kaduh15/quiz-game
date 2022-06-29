@@ -12,6 +12,7 @@ class Feedback extends React.Component {
 
   handleClick = (path) => {
     const { history, dispatch } = this.props;
+    //if (!history) return;
     history.push(path);
     dispatch(resetScore());
   }
@@ -65,7 +66,7 @@ const mapStateToProps = ({ player }) => ({
 Feedback.propTypes = {
   score: PropTypes.number.isRequired,
   assertions: PropTypes.number.isRequired,
-  history: PropTypes.node.isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
   dispatch: PropTypes.func.isRequired,
 
 };
