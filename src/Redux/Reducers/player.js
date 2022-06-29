@@ -1,4 +1,4 @@
-import { ADD_NAME_EMAIL, INCREMENT_SCORE } from '../Actions';
+import { ADD_NAME_EMAIL, INCREMENT_SCORE, RESET_SCORE } from '../Actions';
 
 const initialState = {
   name: '',
@@ -19,6 +19,12 @@ const playerReducer = (state = initialState, action) => {
     return { ...state,
       score: action.payload ? state.score + 1 : state.score,
       assertions: action.payload ? state.assertions + 1 : state.assertions };
+  case RESET_SCORE:
+    return {
+      ...state,
+      score: 0,
+      assertions: 0,
+    };
   default:
     return state;
   }
