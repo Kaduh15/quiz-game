@@ -36,7 +36,7 @@ class Login extends React.Component {
     const token = await this.fetchToken();
     localStorage.setItem('token', token);
 
-    history.push('/jogo');
+    history.push('/game');
     dispatch(addNameEmail({ ...this.state }));
   };
 

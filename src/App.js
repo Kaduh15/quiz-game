@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Login from './Pages/Login';
-import Jogo from './Pages/Jogo';
+import Game from './Pages/Game';
 import Config from './Pages/Config';
 import Feedback from './Pages/Feedback';
 import Ranking from './Pages/Ranking';
@@ -13,7 +13,7 @@ class App extends React.Component {
 
       <Switch>
         <Route exact path="/" component={ Login } />
-        <Route path="/jogo" component={ Jogo } />
+        <Route path="/game" component={ Game } />
         <Route path="/config" component={ Config } />
         <Route path="/feedback" component={ Feedback } />
         <Route path="/ranking" component={ Ranking } />
