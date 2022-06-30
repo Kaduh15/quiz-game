@@ -8,7 +8,7 @@ import Quest from '../Components/Quest';
 const ONE_SECOND_IN_MILLISECONDS = 1000;
 const TIME = 30;
 
-class Jogo extends React.Component {
+class Game extends React.Component {
   state = {
     quests: [],
     answerRandom: [],
@@ -134,11 +134,11 @@ const mapStateToProps = ({ player }) => ({
   nome: player.name,
 });
 
-Jogo.propTypes = {
+Game.propTypes = {
   history: PropTypes.node.isRequired,
   nome: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
 };
 
-export default connect(mapStateToProps)(Jogo);
+export default connect(mapStateToProps)(Game);

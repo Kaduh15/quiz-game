@@ -41,7 +41,7 @@ describe('Testando se a paǵina "Login"...',() => {
             () => screen.getByRole('button', { name:/play/i }),
             { timeout: 3000 },
         )
-        expect(history.location.pathname).toBe('/jogo')
+        expect(history.location.pathname).toBe('/game')
     })
     test('Exibe o logo na tela', () => {
         const {history} = renderWithRouterAndRedux(<App />);
