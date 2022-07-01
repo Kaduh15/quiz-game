@@ -21,6 +21,7 @@ describe('Testando a pagina Game"...',() => {
     name: 'test',
     gravatarEmail: 'test@hotmail.com',
     score: 0
+    //
   }
 
   it('Testando Componente Game', async () =>{
