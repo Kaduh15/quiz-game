@@ -20,23 +20,44 @@ class Ranking extends React.Component {
     const { ranking } = this.state;
     const { history } = this.props;
     return (
-      <div>
-        <h1 data-testid="ranking-title">
+      <div className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
+        <h1
+          className="justify-self-start"
+          data-testid="ranking-title"
+        >
           Ranking
         </h1>
-        { ranking.length > 0 && ranking.map((rank, index) => (
-          <div key={ index + rank.name }>
-            <p data-testid={ `player-name-${index}` }>{rank.name}</p>
-            <p data-testid={ `player-score-${index}` }>
-              Pontos:
-              {rank.score}
-            </p>
-            <p>
-              Acertos:
-              {rank.assertions}
-            </p>
-            <img src={ rank.picture } alt={ rank.name } />
-          </div>))}
+        <div className="flex flex-col gap-4 items-center">
+          { ranking.length > 0 && ranking.map((rank, index) => (
+            <div
+              key={ index + rank.name }
+              className="w-fit bg-blue-300 flex gap-2 px-2 py-1 items-center drop-shadow rounded-md"
+            >
+              <img
+                className="rounded-full"
+                src={ rank.picture }
+                alt={ rank.name }
+              />
+              <p
+                className="truncate w-28"
+                data-testid={ `player-name-${index}` }
+              >
+                {rank.name || 'Usuário'}
+
+              </p>
+              <p
+                className="truncate w-28"
+                data-testid={ `player-score-${index}` }
+              >
+                Pontos:
+                {rank.score}
+              </p>
+              <p>
+                Acertos:
+                {rank.assertions}
+              </p>
+            </div>))}
+        </div>
         <button
           type="button"
           data-testid="btn-go-home"
