@@ -19,7 +19,7 @@ describe('Testando se a paǵina "Login"...',() => {
         const {history} = renderWithRouterAndRedux(<App />);
         const settingsButton = screen.getByRole('button', { name:/configurações/i })
         userEvent.click(settingsButton)
-        expect(history.location.pathname).toBe('/config')
+        expect(screen.getByRole('heading', { name:/config/i })).toBeInTheDocument()
     })
     test('Verifica os inputs e troca de página ao clicar em "Play"', async () => {
         const response = {"response_code":0,"response_message":"Token Generated Successfully!","token":"f551ff46a84dd26576d2c0bd0686b7ee113f73b45b749bebaddef59ececeb59a"}

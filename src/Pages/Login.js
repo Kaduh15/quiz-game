@@ -5,9 +5,10 @@ import { connect } from 'react-redux';
 import logo from '../trivia.png';
 import '../App.css';
 import { addNameEmail } from '../Redux/Actions';
+import Config from './Config';
 
 class Login extends React.Component {
-  state = { name: '', email: '', isDisabeledButton: true };
+  state = { name: '', email: '', isDisabeledButton: true, showConfig: false };
 
   handleChange = ({ target: { name, value } }) => {
     // const {name,value} = target;
@@ -41,8 +42,7 @@ class Login extends React.Component {
   };
 
   render() {
-    const { history } = this.props;
-    const { name, email, isDisabeledButton } = this.state;
+    const { name, email, isDisabeledButton, showConfig } = this.state;
     return (
       <div className="App-header">
         <header>
@@ -50,44 +50,48 @@ class Login extends React.Component {
           <p>SUA VEZ</p>
         </header>
         <main>
-          <form onSubmit={ this.handlesubmit }>
-            <label htmlFor="name">
-              Nome:
-              <input
-                name="name"
-                id="name"
-                value={ name }
-                onChange={ this.handleChange }
-                type="text"
-                data-testid="input-player-name"
-              />
-            </label>
-            <label htmlFor="email">
-              Email:
-              <input
-                id="email"
-                value={ email }
-                onChange={ this.handleChange }
-                name="email"
-                type="email"
-                data-testid="input-gravatar-email"
-              />
-            </label>
-            <button
-              type="submit"
-              data-testid="btn-play"
-              disabled={ isDisabeledButton }
-            >
-              Play
-            </button>
-            <button
-              type="button"
-              data-testid="btn-settings"
-              onClick={ () => history.push('/config') }
-            >
-              Configurações
-            </button>
-          </form>
+          {showConfig ? <Config /> : (
+            <form onSubmit={ this.handlesubmit }>
+              <label htmlFor="name">
+                Nome:
+                <input
+                  name="name"
+                  id="name"
+                  value={ name }
+                  onChange={ this.handleChange }
+                  type="text"
+                  data-testid="input-player-name"
+                />
+              </label>
+              <label htmlFor="email">
+                Email:
+                <input
+                  id="email"
+                  value={ email }
+                  onChange={ this.handleChange }
+                  name="email"
+                  type="email"
+                  data-testid="input-gravatar-email"
+                />
+              </label>
+              <button
+                type="submit"
+                data-testid="btn-play"
+                disabled={ isDisabeledButton }
+              >
+                Play
+              </button>
+            </form>
+          )}
+          <button
+            type="button"
+            data-testid="btn-settings"
+            onClick={ () => {
+              this.setState({ showConfig: !showConfig });
+            } }
+          >
+            { showConfig ? 'login' : 'Configurações'}
+          </button>
         </main>
       </div>
     );

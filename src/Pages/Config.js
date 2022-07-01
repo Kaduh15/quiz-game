@@ -34,12 +34,12 @@ handleChange = ({ target }) => {
 }
 
 handleButton =() => {
-  const { dispatch, history } = this.props;
+  const { dispatch } = this.props;
   const { dificuldade, tipo, categoria } = this.state;
 
   dispatch(choseDifficulty({ dificuldade, tipo, categoria }));
 
-  history.push('/');
+  // history.push('/');
 }
 
 render() {
@@ -85,7 +85,7 @@ render() {
         />
       </label>
 
-      <button type="button" onClick={ this.handleButton }>Começar</button>
+      <button type="button" onClick={ this.handleButton }>Salvar</button>
 
     </div>
 
@@ -94,9 +94,7 @@ render() {
 }
 
 Config.propTypes = {
-  history: PropTypes.node.isRequired,
   dispatch: PropTypes.func.isRequired,
-
 };
 
 export default connect()(Config);

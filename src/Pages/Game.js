@@ -98,7 +98,6 @@ class Game extends React.Component {
     const token = localStorage?.getItem('token');
 
     let url = 'https://opentdb.com/api.php?';
-    console.log(url);
     if (tipo !== 'todos') {
       url += `amount=${tipo}`;
     }
@@ -115,7 +114,7 @@ class Game extends React.Component {
     const json = await response.json();
 
     const numberResponse = 3;
-    if (json?.response_code === numberResponse || json.results.length === 0) {
+    if (json?.response_code === numberResponse || json?.results?.length === 0) {
       const { history } = this.props;
       return history.push('/');
     }
