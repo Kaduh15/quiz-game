@@ -40,7 +40,7 @@ class Game extends React.Component {
       localStorage.setItem('ranking', JSON.stringify([...rankings, { name: nome, score, picture: `https://www.gravatar.com/avatar/${hash}`, assertions }]));
     }
     dispatch(choseDifficulty({ dificuldade: 'todos',
-      tipo: 50,
+      tipo: 5,
       categoria: 'todos' }));
   }
 
