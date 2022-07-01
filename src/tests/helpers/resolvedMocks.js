@@ -47,3 +47,4 @@ export const mockFail = {
   response_code: 3,
   results: []
 }
+

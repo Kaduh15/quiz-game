@@ -109,7 +109,7 @@ class Game extends React.Component {
 
     const response = await fetch(url);
     const json = await response.json();
-    console.log(url);
+
     const numberResponse = 3;
     if (json?.response_code === numberResponse || json.results.length === 0) {
       const { history } = this.props;

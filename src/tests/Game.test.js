@@ -55,6 +55,7 @@ describe('Testando a pagina Game"...',() => {
    expect(screen.getByTestId('header-score')).toBeInTheDocument()
    expect(screen.getByRole('banner')).toBeInTheDocument()
   })
+
   it('Testando Componente Game',async () =>{
     renderWithRouterAndRedux(<Game/>, INITIAL_STATE, '/game')
     expect(screen.getByRole('heading', {  name: /jogo/i})).toBeInTheDocument()
@@ -65,6 +66,7 @@ describe('Testando a pagina Game"...',() => {
 	// expect(await screen.findByText(/28/, '', {timeout:27000})).not.toBeInTheDocument()
 	expect(await screen.findByTestId('btn-next','', {timeout:27000})).toBeInTheDocument()
   }, 38000)
+
 
   it('Testando Componente Quest', () => {
     const buttonClicked = true
@@ -87,6 +89,7 @@ describe('Testando a pagina Game"...',() => {
   })
   it('Testando Componente Quest', async () => {
     const {history} = renderWithRouterAndRedux(<App />, INITIAL_STATE, '/game');
+
 	expect(history.location.pathname).toBe('/game')
   userEvent.click(await screen.findByTestId('correct-answer'));
   userEvent.click(await screen.findByTestId('btn-next'));
@@ -95,6 +98,7 @@ describe('Testando a pagina Game"...',() => {
   expect(await screen.findByTestId('correct-answer'));
   expect(await screen.findAllByTestId('correct-answer')).toHaveLength(1);
   expect(await screen.findAllByTestId(/wrong-answer/i)).toHaveLength(1);
+
 
 
   userEvent.click(await screen.findByTestId('btn-next'));
@@ -107,6 +111,7 @@ describe('Testando a pagina Game"...',() => {
   expect( await screen.findByText(/Feedback/i)).toBeInTheDocument()
   expect(history.location.pathname).toBe('/feedback')
 })
+
 
 it('Testando Componente Game', async () =>{
     global.fetch = jest.fn().mockResolvedValue({
@@ -138,6 +143,7 @@ it('Testando Componente Game', async () =>{
 //     } )
   
   })
+
 
 
   })
