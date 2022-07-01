@@ -42,6 +42,7 @@ class Game extends React.Component {
     dispatch(choseDifficulty({ dificuldade: 'todos',
       tipo: 5,
       categoria: 'todos' }));
+    clearTimeout(this.a);
   }
 
   handleTime = (time) => {
