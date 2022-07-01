@@ -44,6 +44,7 @@ export const mockSucess = {
 }
 
 export const mockFail = {
-  response_code: 0,
+  response_code: 3,
   results: []
 }
+
