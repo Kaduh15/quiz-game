@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import Header from '../Components/Header';
 import Quest from '../Components/Quest';
 import { choseDifficulty } from '../Redux/Actions';
+import './Games.css';
 
 const ONE_SECOND_IN_MILLISECONDS = 1000;
 const TIME = 30;
@@ -16,6 +17,7 @@ class Game extends React.Component {
     questNumber: 0,
     buttonClicked: false,
     time: TIME,
+    dificuldades: '',
   };
 
   async componentDidMount() {
@@ -81,7 +83,9 @@ class Game extends React.Component {
     const {
       correct_answer: correctAnswer,
       incorrect_answers: incorrectAnswer,
+      difficulty,
     } = quests[questNumber];
+    this.cores(difficulty);
 
     const answers = [correctAnswer, ...incorrectAnswer];
     answers.sort(() => Math.random() - number);
@@ -122,29 +126,41 @@ class Game extends React.Component {
     this.setState((state) => ({ buttonClicked: !state.stabuttonClicked, time: TIME }));
   };
 
+  cores = (difficulty) => {
+    if (difficulty === 'easy') {
+      this.setState({ dificuldades: 'easy' });
+    }
+    if (difficulty === 'medium') {
+      this.setState({ dificuldades: 'medium' });
+    }
+    if (difficulty === 'hard') {
+      this.setState({ dificuldades: 'hard' });
+    }
+  }
+
   render() {
     const { quests, questNumber, answerRandom,
-      buttonClicked, time } = this.state;
+      buttonClicked, time, dificuldades } = this.state;
     return (
       <>
         <Header />
         <h1>Jogo</h1>
         <span>Pontuação:</span>
-        <span>
+        <span className={ dificuldades === 'easy' ? 'easy' : '' }>
           {' '}
           <strong>Easy:</strong>
           {' '}
           50
         </span>
         {' '}
-        <span>
+        <span className={ dificuldades === 'medium' ? 'medium' : '' }>
           {' '}
           <strong>Medium:</strong>
           {' '}
           100
         </span>
         {' '}
-        <span>
+        <span className={ dificuldades === 'hard' ? 'hard' : '' }>
           {' '}
           <strong>Hard:</strong>
           {' '}

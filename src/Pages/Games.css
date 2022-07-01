@@ -1,0 +1,21 @@
+.easy {
+  background-color: rgb(140, 140, 248);
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 5px;
+
+}
+
+.medium {
+  background-color: rgb(115, 247, 103);
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.hard {
+  background-color: rgb(247, 120, 103);
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 5px;
+}

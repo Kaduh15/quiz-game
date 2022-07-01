@@ -77,7 +77,7 @@ render() {
       <label htmlFor="tipo">
         <input
           onChange={ this.handleChange }
-          value={ tipo > 50 ? 50 : tipo }
+          value={ tipo }
           id="tipo"
           name="tipo"
           type="number"
