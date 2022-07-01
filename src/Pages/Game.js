@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { any } from 'prop-types';
 import md5 from 'crypto-js/md5';
 import { connect } from 'react-redux';
 import Header from '../Components/Header';
@@ -29,13 +29,13 @@ class Game extends React.Component {
   }
 
   componentWillUnmount() {
-    const { nome, email, score, dispatch } = this.props;
+    const { nome, email, score, dispatch, assertions } = this.props;
     const hash = md5(email).toString();
     const rankings = JSON.parse(localStorage?.getItem('ranking'));
     if (!rankings) {
-      localStorage.setItem('ranking', JSON.stringify([{ name: nome, score, picture: `https://www.gravatar.com/avatar/${hash}` }]));
+      localStorage.setItem('ranking', JSON.stringify([{ name: nome, score, picture: `https://www.gravatar.com/avatar/${hash}`, assertions }]));
     } else {
-      localStorage.setItem('ranking', JSON.stringify([...rankings, { name: nome, score, picture: `https://www.gravatar.com/avatar/${hash}` }]));
+      localStorage.setItem('ranking', JSON.stringify([...rankings, { name: nome, score, picture: `https://www.gravatar.com/avatar/${hash}`, assertions }]));
     }
     dispatch(choseDifficulty({ dificuldade: 'todos',
       tipo: 50,
@@ -129,6 +129,28 @@ class Game extends React.Component {
       <>
         <Header />
         <h1>Jogo</h1>
+        <span>Pontuação:</span>
+        <span>
+          {' '}
+          <strong>Easy:</strong>
+          {' '}
+          50
+        </span>
+        {' '}
+        <span>
+          {' '}
+          <strong>Medium:</strong>
+          {' '}
+          100
+        </span>
+        {' '}
+        <span>
+          {' '}
+          <strong>Hard:</strong>
+          {' '}
+          150
+        </span>
+        {' '}
         {quests?.length > 0 && (
           <Quest
             { ...quests[questNumber] }
@@ -156,17 +178,29 @@ const mapStateToProps = ({ player }) => ({
   score: player.score,
   email: player.gravatarEmail,
   nome: player.name,
+  assertions: player.assertions,
   filtros: player.filtros,
 });
 
 Game.propTypes = {
-  history: PropTypes.node.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
   nome: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
-  difficulty: PropTypes.string.isRequired,
+  difficulty: PropTypes.func,
   dispatch: PropTypes.func.isRequired,
-  filtros: PropTypes.node.isRequired,
+  filtros: PropTypes.shape({
+    tipo: PropTypes.number.isRequired,
+    difficulty: PropTypes.string.isRequired,
+    categoria: PropTypes.string.isRequired,
+  }).isRequired,
+  assertions: PropTypes.number.isRequired,
 
+};
+
+Game.defaultProps = {
+  difficulty: any,
 };
 export default connect(mapStateToProps)(Game);

@@ -29,8 +29,16 @@ class Feedback extends React.Component {
               {score < NOTA ? 'Could be better...' : 'Well Done!' }
 
             </p>
-            <p data-testid="feedback-total-score">{score}</p>
-            <p data-testid="feedback-total-question">{assertions}</p>
+            <p data-testid="feedback-total-score">
+              Pontos:
+              {' '}
+              {score}
+            </p>
+            <p data-testid="feedback-total-question">
+              Acertos:
+              {' '}
+              {assertions}
+            </p>
           </main>
           <button
             type="button"

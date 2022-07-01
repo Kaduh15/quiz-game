@@ -27,7 +27,14 @@ class Ranking extends React.Component {
         { ranking.length > 0 && ranking.map((rank, index) => (
           <div key={ index + rank.name }>
             <p data-testid={ `player-name-${index}` }>{rank.name}</p>
-            <p data-testid={ `player-score-${index}` }>{rank.score}</p>
+            <p data-testid={ `player-score-${index}` }>
+              Pontos:
+              {rank.score}
+            </p>
+            <p>
+              Acertos:
+              {rank.assertions}
+            </p>
             <img src={ rank.picture } alt={ rank.name } />
           </div>))}
         <button
@@ -45,7 +52,9 @@ class Ranking extends React.Component {
 }
 
 Ranking.propTypes = {
-  history: PropTypes.node.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 export default Ranking;
