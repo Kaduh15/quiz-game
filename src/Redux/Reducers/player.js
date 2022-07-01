@@ -1,10 +1,12 @@
-import { ADD_NAME_EMAIL, INCREMENT_SCORE, RESET_SCORE } from '../Actions';
+import { ADD_NAME_EMAIL, CHOSEDIFFICULTY,
+  INCREMENT_SCORE, RESET_SCORE } from '../Actions';
 
 const initialState = {
   name: '',
   assertions: 0,
   score: 0,
   gravatarEmail: '',
+  filtros: { difficulty: 'todos', tipo: 5, categoria: 'todos' },
 };
 
 const playerReducer = (state = initialState, action) => {
@@ -24,6 +26,13 @@ const playerReducer = (state = initialState, action) => {
       ...state,
       score: 0,
       assertions: 0,
+    };
+  case CHOSEDIFFICULTY:
+    return {
+      ...state,
+      filtros: { difficulty: action.payload.dificuldade,
+        tipo: action.payload.tipo,
+        categoria: action.payload.categoria },
     };
   default:
     return state;

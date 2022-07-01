@@ -25,10 +25,11 @@ class Quest extends Component {
       answerRandom,
       correct_answer: correctAnswer,
       dispatch,
-      buttonClicked, changeDisabledButton } = this.props;
+      buttonClicked, changeDisabledButton, difficulty } = this.props;
     return (
       <div>
         <p data-testid="question-category">{category}</p>
+        <p data-testid="question-difficulty">{difficulty}</p>
         <p data-testid="question-text">{question}</p>
         <div data-testid="answer-options">
           {answerRandom.length > 0 && answerRandom.map((answer, index) => (
@@ -62,6 +63,7 @@ Quest.propTypes = {
   dispatch: PropTypes.func.isRequired,
   buttonClicked: PropTypes.bool.isRequired,
   changeDisabledButton: PropTypes.func.isRequired,
+  difficulty: PropTypes.string.isRequired,
 };
 
 export default connect()(Quest);
