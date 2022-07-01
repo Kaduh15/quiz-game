@@ -87,7 +87,7 @@ class Game extends React.Component {
     const url = (toke) => `https://opentdb.com/api.php?amount=5&token=${toke}`;
     const response = await fetch(url(token));
     const json = await response.json();
-    console.log(json);
+    // console.log(json);
     const numberResponse = 3;
     if (json?.response_code === numberResponse) {
       const { history } = this.props;
