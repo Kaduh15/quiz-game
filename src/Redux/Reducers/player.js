@@ -19,8 +19,8 @@ const playerReducer = (state = initialState, action) => {
     };
   case INCREMENT_SCORE:
     return { ...state,
-      score: action.payload ? state.score + 1 : state.score,
-      assertions: action.payload ? state.assertions + 1 : state.assertions };
+      score: state.score + action.payload.score,
+      assertions: action.payload.assertions ? state.assertions + 1 : state.assertions };
   case RESET_SCORE:
     return {
       ...state,

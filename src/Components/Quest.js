@@ -6,7 +6,22 @@ import { incrementScore } from '../Redux/Actions';
 import './Quest.css';
 
 class Quest extends Component {
-  checkAnswer = (answer, correctAnswer) => answer === correctAnswer;
+  checkAnswer = (answer, correctAnswer) => {
+    const { difficulty } = this.props;
+    if (answer === correctAnswer) {
+      if (difficulty === 'hard') {
+        return { score: 150, assertions: true };
+      }
+      if (difficulty === 'medium') {
+        return { score: 100, assertions: true };
+      }
+      if (difficulty === 'easy') {
+        return { score: 50, assertions: true };
+      }
+    } else {
+      return { score: 0, assertions: false };
+    }
+  };
 
   changeClassColor = (answer, correctAnswer) => {
     let color;
