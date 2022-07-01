@@ -4,6 +4,7 @@ import md5 from 'crypto-js/md5';
 import { connect } from 'react-redux';
 import Header from '../Components/Header';
 import Quest from '../Components/Quest';
+import { choseDifficulty } from '../Redux/Actions';
 
 const ONE_SECOND_IN_MILLISECONDS = 1000;
 const TIME = 30;
@@ -28,7 +29,7 @@ class Game extends React.Component {
   }
 
   componentWillUnmount() {
-    const { nome, email, score } = this.props;
+    const { nome, email, score, dispatch } = this.props;
     const hash = md5(email).toString();
     const rankings = JSON.parse(localStorage?.getItem('ranking'));
     if (!rankings) {
@@ -36,6 +37,9 @@ class Game extends React.Component {
     } else {
       localStorage.setItem('ranking', JSON.stringify([...rankings, { name: nome, score, picture: `https://www.gravatar.com/avatar/${hash}` }]));
     }
+    dispatch(choseDifficulty({ dificuldade: 'todos',
+      tipo: 50,
+      categoria: 'todos' }));
   }
 
   handleTime = (time) => {
@@ -50,10 +54,12 @@ class Game extends React.Component {
   }
 
   handleClick = () => {
-    const number = 4;
+    // const number = 4;
     const { history } = this.props;
+    const { quests } = this.state;
     const { questNumber } = this.state;
-    if (questNumber !== number) {
+
+    if (questNumber !== quests.length - 1) {
       this.setState(
         {
           questNumber: questNumber + 1,
@@ -83,12 +89,29 @@ class Game extends React.Component {
   };
 
   getQuests = async () => {
+    const { filtros: { difficulty, tipo, categoria } } = this.props;
+
     const token = localStorage?.getItem('token');
-    const url = (toke) => `https://opentdb.com/api.php?amount=5&token=${toke}`;
-    const response = await fetch(url(token));
+
+    let url = 'https://opentdb.com/api.php?';
+    console.log(url);
+    if (tipo !== 'todos') {
+      url += `amount=${tipo}`;
+    }
+    if (categoria !== 'todos') {
+      url += `&category=${categoria}`;
+    }
+    if (difficulty !== 'todos') {
+      url += `&difficulty=${difficulty}`;
+    }
+
+    url += `&token=${token}`;
+
+    const response = await fetch(url);
     const json = await response.json();
+
     const numberResponse = 3;
-    if (json?.response_code === numberResponse) {
+    if (json?.response_code === numberResponse || json.results.length === 0) {
       const { history } = this.props;
       return history.push('/');
     }
@@ -100,7 +123,8 @@ class Game extends React.Component {
   };
 
   render() {
-    const { quests, questNumber, answerRandom, buttonClicked, time } = this.state;
+    const { quests, questNumber, answerRandom,
+      buttonClicked, time } = this.state;
     return (
       <>
         <Header />
@@ -132,6 +156,7 @@ const mapStateToProps = ({ player }) => ({
   score: player.score,
   email: player.gravatarEmail,
   nome: player.name,
+  filtros: player.filtros,
 });
 
 Game.propTypes = {
@@ -139,6 +164,9 @@ Game.propTypes = {
   nome: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
   score: PropTypes.number.isRequired,
-};
+  difficulty: PropTypes.string.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  filtros: PropTypes.node.isRequired,
 
+};
 export default connect(mapStateToProps)(Game);
