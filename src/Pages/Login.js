@@ -43,7 +43,7 @@ class Login extends React.Component {
   render() {
     const { name, email, isDisabeledButton, showConfig } = this.state;
     return (
-      <div className=" gap-9 dark:bg-gray-800 flex flex-col justify-center items-center w-full min-h-screen">
+      <div className="gap-9 dark:bg-gray-800 flex flex-col justify-center items-center w-full min-h-screen">
         <header className="flex flex-col items-center justify-center gap-4 text-white">
           <img src={ logo } className="w-72" alt="logo" />
           <p className="text-2xl font-bold">SUA VEZ</p>
@@ -54,7 +54,7 @@ class Login extends React.Component {
               onSubmit={ this.handlesubmit }
               className="flex flex-col justify-center space-y-10 p-8 rounded-md bg-gray-600 h-64 "
             >
-              <label className="flex gap-4 " htmlFor="name">
+              <label className="flex gap-4 text-white" htmlFor="name">
                 Nome:
                 <input
                   className="rounded w-48 h-6 "
@@ -68,7 +68,7 @@ class Login extends React.Component {
               </label>
               <label
                 htmlFor="email"
-                className="flex gap-4 space-x-4"
+                className="flex gap-4 space-x-4 text-white "
               >
                 Email:
                 <input

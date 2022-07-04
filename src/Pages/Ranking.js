@@ -20,13 +20,22 @@ class Ranking extends React.Component {
     const { ranking } = this.state;
     const { history } = this.props;
     return (
-      <div className="bg-gray-800 min-h-screen flex flex-col justify-center items-center space-y-0">
+      <div className="bg-gray-800 min-h-screen flex flex-col justify-center gap-4 items-center space-y-0">
         <h1
           className="text-white text-6xl justify-self-start"
           data-testid="ranking-title"
         >
           Ranking
         </h1>
+        <button
+          className="mx-auto w-fit px-3 py-1 bg-white text-gray-800 rounded hover:bg-blue-500 hover:text-white transition-color duration-200"
+          type="button"
+          data-testid="btn-go-home"
+          onClick={ () => history.push('/') }
+        >
+          Inicio
+
+        </button>
         <div className="flex flex-col gap-4 items-center">
           { ranking.length > 0 && ranking.map((rank, index) => (
             <div
@@ -58,14 +67,6 @@ class Ranking extends React.Component {
               </p>
             </div>))}
         </div>
-        <button
-          type="button"
-          data-testid="btn-go-home"
-          onClick={ () => history.push('/') }
-        >
-          Inicio
-
-        </button>
       </div>
 
     );

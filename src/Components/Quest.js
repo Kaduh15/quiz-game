@@ -33,7 +33,8 @@ class Quest extends Component {
 
   changeClassColor = (answer, correctAnswer) => {
     const color = (answer === correctAnswer)
-      ? 'border-b-2 border-green-500 rounded-md' : 'border-b-2 border-red-500 rounded-md';
+      ? 'border-b-[6px] border-green-500 rounded-md'
+      : 'border-b-[6px] border-red-500 rounded-md';
     return color;
   }
 
@@ -50,13 +51,19 @@ class Quest extends Component {
         className="flex flex-col items-center bg-gray-200 p-6 gap-4 rounded-md"
       >
         <p
-          className="font-semibold"
+          className="font-semibold text-3xl"
           data-testid="question-category"
         >
           {category}
 
         </p>
-        <p data-testid="question-text">{convertTextToHTML(question)}</p>
+        <p
+          className="text-xl"
+          data-testid="question-text"
+        >
+          {convertTextToHTML(question)}
+
+        </p>
         <div data-testid="answer-options" className="flex gap-6">
           {answerRandom.length > 0 && answerRandom.map((answer, index) => (
             <button

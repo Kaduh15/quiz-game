@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, #root {
-  @apply min-h-screen
+#root {
+  min-height: 100vh;
 }

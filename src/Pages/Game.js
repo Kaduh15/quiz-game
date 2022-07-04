@@ -8,11 +8,11 @@ import { choseDifficulty } from '../Redux/Actions';
 import './Games.css';
 
 const ONE_SECOND_IN_MILLISECONDS = 1000;
-const TIME = 0;
+const TIME = 30;
 
 const colorTime = (time) => {
   if (time <= Number('10')) return 'text-red-500';
-  if (time <= Number('20')) return 'text-yellow-300';
+  if (time <= Number('20')) return 'text-yellow-600';
   return '';
 };
 
@@ -155,21 +155,21 @@ class Game extends React.Component {
           <div className="flex gap-3">
             <span
               className={ dificuldades === 'easy'
-                ? 'border-b-2 border-green-500' : '' }
+                ? 'border-b-8 border-green-500' : '' }
             >
               <strong>Easy:</strong>
               50
             </span>
             <span
               className={ dificuldades === 'medium'
-                ? 'border-b-2 border-blue-500' : '' }
+                ? 'border-b-8 border-blue-500' : '' }
             >
               <strong>Medium:</strong>
               100
             </span>
             <span
               className={ dificuldades === 'hard'
-                ? 'border-b-2 border-red-500' : '' }
+                ? 'border-b-8 border-red-500' : '' }
             >
               <strong>Hard:</strong>
               150
@@ -177,7 +177,7 @@ class Game extends React.Component {
           </div>
           {!buttonClicked && (
             <p
-              className={ `${colorTime(time)} m-auto font-bold` }
+              className={ `${colorTime(time)} m-auto font-bold text-2xl drop-shadow font-mono bg-gray-200 rounded-full w-10 h-10 p-2 flex justify-center items-center` }
             >
               {time}
             </p>)}
