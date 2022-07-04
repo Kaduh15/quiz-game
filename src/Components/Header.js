@@ -10,7 +10,7 @@ class Header extends Component {
     const { name, email, score } = this.props;
     const hash = md5(email).toString();
     return (
-      <header className="bg-blue-400 px-12 py-4 flex items-center justify-center space-x-80">
+      <header className="bg-blue-400 px-12 py-4 flex items-center justify-center space-x-5">
         <img
           className="rounded-full drop-shadow-md"
           src={ `https://www.gravatar.com/avatar/${hash}` }

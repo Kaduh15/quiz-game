@@ -20,9 +20,9 @@ class Ranking extends React.Component {
     const { ranking } = this.state;
     const { history } = this.props;
     return (
-      <div className="bg-gray-800 min-h-screen flex flex-col justify-center items-center">
+      <div className="bg-gray-800 min-h-screen flex flex-col justify-center items-center space-y-0">
         <h1
-          className="justify-self-start"
+          className="text-white text-6xl justify-self-start"
           data-testid="ranking-title"
         >
           Ranking

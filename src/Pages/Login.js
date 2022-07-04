@@ -7,7 +7,7 @@ import { addNameEmail } from '../Redux/Actions';
 import Config from './Config';
 
 class Login extends React.Component {
-  state = { name: '', email: '', isDisabeledButton: true, showConfig: true };
+  state = { name: '', email: '', isDisabeledButton: true, showConfig: false };
 
   handleChange = ({ target: { name, value } }) => {
     // const {name,value} = target;
@@ -49,7 +49,7 @@ class Login extends React.Component {
           <p className="text-2xl font-bold">SUA VEZ</p>
         </header>
         <main className="flex flex-col">
-          {showConfig ? <Config /> : (
+          { showConfig ? <Config /> : (
             <form
               onSubmit={ this.handlesubmit }
               className="flex flex-col justify-center space-y-10 p-8 rounded-md bg-gray-600 h-64 "

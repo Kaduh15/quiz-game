@@ -8,7 +8,13 @@ import { choseDifficulty } from '../Redux/Actions';
 import './Games.css';
 
 const ONE_SECOND_IN_MILLISECONDS = 1000;
-const TIME = 30;
+const TIME = 0;
+
+const colorTime = (time) => {
+  if (time <= Number('10')) return 'text-red-500';
+  if (time <= Number('20')) return 'text-yellow-300';
+  return '';
+};
 
 class Game extends React.Component {
   state = {
@@ -144,47 +150,57 @@ class Game extends React.Component {
     return (
       <>
         <Header />
-        <h1>Jogo</h1>
-        <span>Pontuação:</span>
-        <span className={ dificuldades === 'easy' ? 'easy' : '' }>
-          {' '}
-          <strong>Easy:</strong>
-          {' '}
-          50
-        </span>
-        {' '}
-        <span className={ dificuldades === 'medium' ? 'medium' : '' }>
-          {' '}
-          <strong>Medium:</strong>
-          {' '}
-          100
-        </span>
-        {' '}
-        <span className={ dificuldades === 'hard' ? 'hard' : '' }>
-          {' '}
-          <strong>Hard:</strong>
-          {' '}
-          150
-        </span>
-        {' '}
-        {quests?.length > 0 && (
-          <Quest
-            { ...quests[questNumber] }
-            answerRandom={ answerRandom }
-            buttonClicked={ buttonClicked }
-            changeDisabledButton={ this.changeDisabledButton }
-          />
-        )}
-        {buttonClicked && (
-          <button
-            type="button"
-            onClick={ this.handleClick }
-            data-testid="btn-next"
-          >
-            Próxima
-          </button>
-        )}
-        {!buttonClicked && <div>{time}</div>}
+        <div className="flex flex-col gap-2 m-3">
+          <span>Pontuação:</span>
+          <div className="flex gap-3">
+            <span
+              className={ dificuldades === 'easy'
+                ? 'border-b-2 border-green-500' : '' }
+            >
+              <strong>Easy:</strong>
+              50
+            </span>
+            <span
+              className={ dificuldades === 'medium'
+                ? 'border-b-2 border-blue-500' : '' }
+            >
+              <strong>Medium:</strong>
+              100
+            </span>
+            <span
+              className={ dificuldades === 'hard'
+                ? 'border-b-2 border-red-500' : '' }
+            >
+              <strong>Hard:</strong>
+              150
+            </span>
+          </div>
+          {!buttonClicked && (
+            <p
+              className={ `${colorTime(time)} m-auto font-bold` }
+            >
+              {time}
+            </p>)}
+          {quests?.length > 0 && (
+            <Quest
+              { ...quests[questNumber] }
+              answerRandom={ answerRandom }
+              buttonClicked={ buttonClicked }
+              changeDisabledButton={ this.changeDisabledButton }
+            />
+          )}
+          {buttonClicked && (
+            <button
+              className="mx-auto bg-gray-800 text-white w-20 rounded hover:bg-blue-500 hover:text-white transition-color duration-200"
+              type="button"
+              onClick={ this.handleClick }
+              data-testid="btn-next"
+            >
+              Próxima
+            </button>
+          )}
+        </div>
+
       </>
     );
   }
