@@ -22,39 +22,40 @@ class Feedback extends React.Component {
     return (
       <>
         <Header />
-        <div>
-          <h1>Feedback</h1>
-          <main>
-            <p data-testid="feedback-text">
+        <div
+          className="flex p-3 text-white min-h-full flex-col justify-center text-2xl gap-4 h-full py-10 bg-gray-500"
+        >
+          <main className="flex flex-col justify-center items-center">
+            <p
+              className="font-semibold"
+              data-testid="feedback-text"
+            >
               {score < NOTA ? 'Could be better...' : 'Well Done!' }
-
             </p>
             <p data-testid="feedback-total-score">
               Pontos:
-              {' '}
               {score}
             </p>
             <p data-testid="feedback-total-question">
               Acertos:
-              {' '}
               {assertions}
             </p>
           </main>
           <button
+            className="mx-auto w-fit px-4 py-2 bg-gray-800 text-white rounded hover:bg-blue-500 hover:text-white transition-color duration-200"
             type="button"
             data-testid="btn-play-again"
             onClick={ () => this.handleClick('/') }
           >
             Play Again
-
           </button>
           <button
+            className="self-end"
             type="button"
             data-testid="btn-ranking"
             onClick={ () => this.handleClick('/ranking') }
           >
             Ranking
-
           </button>
         </div>
       </>

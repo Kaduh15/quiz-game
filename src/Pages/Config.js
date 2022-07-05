@@ -34,58 +34,64 @@ handleChange = ({ target }) => {
 }
 
 handleButton =() => {
-  const { dispatch, history } = this.props;
+  const { dispatch } = this.props;
   const { dificuldade, tipo, categoria } = this.state;
 
   dispatch(choseDifficulty({ dificuldade, tipo, categoria }));
 
-  history.push('/');
+  // history.push('/');
 }
 
 render() {
   const { category, tipo } = this.state;
 
+  if (category.lenght === 0) return (<div />);
+
   return (
-    <div>
-      <h1 data-testid="settings-title">
+    <div className="bg-white dark:bg-gray-800">
+      <h1 className="text-white text-6xl" data-testid="settings-title">
         Config
       </h1>
-      <label htmlFor="dificuldade">
-
-        <select onChange={ this.handleChange } id="dificuldade" name="dificuldade">
-          <option hidden>Dificuldade</option>
-
-          <option value="easy">easy</option>
-          <option value="medium">normal</option>
-          <option value="hard">hard</option>
-        </select>
-
-      </label>
-
-      <label htmlFor="categoria">
-
-        <select onChange={ this.handleChange } id="categoria" name="categoria">
-          <option hidden>Categoria</option>
-
-          {category.lenght !== 0 && category.map((el) => (
-            <option value={ el.id } key={ el.id }>{el.name}</option>))}
-
-        </select>
-
-      </label>
-
-      <label htmlFor="tipo">
-        <input
-          onChange={ this.handleChange }
-          value={ tipo }
-          id="tipo"
-          name="tipo"
-          type="number"
-          max="50"
-        />
-      </label>
-
-      <button type="button" onClick={ this.handleButton }>Começar</button>
+      <div className="flex flex-col dark:flex-row rounded bg-gray-500 p-8 gap-4">
+        <label htmlFor="dificuldade">
+          <select onChange={ this.handleChange } id="dificuldade" name="dificuldade">
+            <option hidden>Dificuldade</option>
+            <option value="easy">easy</option>
+            <option value="medium">normal</option>
+            <option value="hard">hard</option>
+          </select>
+        </label>
+        <label htmlFor="categoria">
+          <select
+            className="w-32"
+            onChange={ this.handleChange }
+            id="categoria"
+            name="categoria"
+          >
+            <option hidden>Categoria</option>
+            {category.lenght !== 0 && category.map((el) => (
+              <option value={ el.id } key={ el.id }>{el.name}</option>))}
+          </select>
+        </label>
+        <label htmlFor="tipo">
+          <input
+            className="w-12 items-center"
+            onChange={ this.handleChange }
+            value={ tipo }
+            id="tipo"
+            name="tipo"
+            type="number"
+            max="50"
+          />
+        </label>
+        <button
+          className="bg-white text-gray-800 w-20 rounded hover:bg-blue-500 hover:text-white transition-color duration-200"
+          type="button"
+          onClick={ this.handleButton }
+        >
+          Salvar
+        </button>
+      </div>
 
     </div>
 
@@ -94,9 +100,7 @@ render() {
 }
 
 Config.propTypes = {
-  history: PropTypes.node.isRequired,
   dispatch: PropTypes.func.isRequired,
-
 };
 
 export default connect()(Config);

@@ -42,19 +42,19 @@ describe('Testando a pagina Game"...',() => {
       const btn1 = screen.getAllByRole('button')[0]
       userEvent.click(btn1)
 
-   const allBtn = screen.getAllByRole('button')
-   expect(allBtn).toHaveLength(3)
-   
+  const allBtn = screen.getAllByRole('button')
+  expect(allBtn).toHaveLength(3)
+  
     } )
   
   }, 32000)
 
   it('Testando o header dentro de Game',() =>{
     renderWithRouterAndRedux(<Game/>, INITIAL_STATE, '/game')
-   expect(screen.getByRole('img', {  name: /foto perfil/i})).toBeInTheDocument()
-   expect(screen.getByTestId('header-player-name')).toBeInTheDocument()
-   expect(screen.getByTestId('header-score')).toBeInTheDocument()
-   expect(screen.getByRole('banner')).toBeInTheDocument()
+  expect(screen.getByRole('img', {  name: /foto perfil/i})).toBeInTheDocument()
+  expect(screen.getByTestId('header-player-name')).toBeInTheDocument()
+  expect(screen.getByTestId('header-score')).toBeInTheDocument()
+  expect(screen.getByRole('banner')).toBeInTheDocument()
   })
 
   it('Testando Componente Game',async () =>{
@@ -72,11 +72,11 @@ describe('Testando a pagina Game"...',() => {
   it('Testando Componente Quest', () => {
     const buttonClicked = true
   const changeDisabledButton = jest.fn().mockReturnValue(true)
-   const {history} = renderWithRouterAndRedux(<Quest buttonClicked={buttonClicked} changeDisabledButton={changeDisabledButton }answerRandom={answers} {...quests[0]}/>, INITIAL_STATE, '/game')
-   expect(history.location.pathname).toBe('/game')
+  const {history} = renderWithRouterAndRedux(<Quest buttonClicked={buttonClicked} changeDisabledButton={changeDisabledButton }answerRandom={answers} {...quests[0]}/>, INITIAL_STATE, '/game')
+  expect(history.location.pathname).toBe('/game')
     expect(screen.getByTestId('question-category')).toBeInTheDocument()
     expect(screen.getByText('History')).toBeInTheDocument()
-   
+
     expect(screen.getByTestId('question-text')).toBeInTheDocument()  
     expect(screen.getAllByRole('button')).toHaveLength(2)
     const btn = screen.getAllByRole('button')[0]
@@ -132,7 +132,7 @@ it('Testando Componente Game', async () =>{
 //     await waitFor (() =>{ 
 //       const btn = screen.getAllByRole('button')
 //       expect(btn).toHaveLength(2)
-  
+
 //     } )
 //     await waitFor (() =>{ 
 //       const btn1 = screen.getAllByRole('button')[0]
@@ -140,14 +140,8 @@ it('Testando Componente Game', async () =>{
 
 //    const allBtn = screen.getAllByRole('button')
 //    expect(allBtn).toHaveLength(3)
-   
+
 //     } )
-  
-  })
 
-
-
-  })
-
-  
-
+})
+})

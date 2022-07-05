@@ -5,6 +5,14 @@ import { connect } from 'react-redux';
 import { incrementScore } from '../Redux/Actions';
 import './Quest.css';
 
+const convertTextToHTML = (htmlString) => {
+  const div = document.createElement('div');
+  div.innerHTML = htmlString.trim();
+
+  // Change this to div.childNodes to support multiple top-level nodes.
+  return div.firstChild.textContent;
+};
+
 class Quest extends Component {
   checkAnswer = (answer, correctAnswer) => {
     const { difficulty } = this.props;
@@ -24,12 +32,9 @@ class Quest extends Component {
   };
 
   changeClassColor = (answer, correctAnswer) => {
-    let color;
-    if (answer === correctAnswer) {
-      color = 'correct-Answer';
-    } else {
-      color = 'incorrect-Answer';
-    }
+    const color = (answer === correctAnswer)
+      ? 'border-b-[6px] border-green-500 rounded-md'
+      : 'border-b-[6px] border-red-500 rounded-md';
     return color;
   }
 
@@ -40,17 +45,33 @@ class Quest extends Component {
       answerRandom,
       correct_answer: correctAnswer,
       dispatch,
-      buttonClicked, changeDisabledButton, difficulty } = this.props;
+      buttonClicked, changeDisabledButton } = this.props;
     return (
-      <div>
-        <p data-testid="question-category">{category}</p>
-        <p data-testid="question-difficulty">{difficulty}</p>
-        <p data-testid="question-text">{question}</p>
-        <div data-testid="answer-options">
+      <div
+        className="flex flex-col items-center bg-gray-200 p-6 gap-4 rounded-md"
+      >
+        <p
+          className="font-semibold text-3xl"
+          data-testid="question-category"
+        >
+          {category}
+
+        </p>
+        <p
+          className="text-xl"
+          data-testid="question-text"
+        >
+          {convertTextToHTML(question)}
+
+        </p>
+        <div data-testid="answer-options" className="flex gap-6">
           {answerRandom.length > 0 && answerRandom.map((answer, index) => (
             <button
-              className={ buttonClicked
-                ? this.changeClassColor(answer, correctAnswer) : '' }
+              className={ `${buttonClicked
+                ? this.changeClassColor(answer, correctAnswer)
+                : ''}
+                bg-slate-600 text-white px-4 py-1 rounded-md drop-shadow
+                font-mono hover:bg-blue-400` }
               key={ index }
               type="button"
               data-testid={ answer === correctAnswer
@@ -61,7 +82,7 @@ class Quest extends Component {
                 dispatch(incrementScore(this.checkAnswer(answer, correctAnswer)));
               } }
             >
-              {answer}
+              {convertTextToHTML(answer)}
             </button>
           ))}
         </div>

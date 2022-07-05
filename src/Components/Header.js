@@ -10,15 +10,15 @@ class Header extends Component {
     const { name, email, score } = this.props;
     const hash = md5(email).toString();
     return (
-      <header>
+      <header className="bg-blue-400 px-12 py-4 flex items-center justify-center space-x-5">
         <img
+          className="rounded-full drop-shadow-md"
           src={ `https://www.gravatar.com/avatar/${hash}` }
           alt="foto perfil"
           data-testid="header-profile-picture"
         />
-        <p data-testid="header-player-name">{name}</p>
-        <p data-testid="header-score">{score}</p>
-        Header
+        <p data-testid="header-score" className="min-w-fit">{`Pontos: ${score}`}</p>
+        <p data-testid="header-player-name">{name || 'Usuario' }</p>
       </header>
     );
   }
