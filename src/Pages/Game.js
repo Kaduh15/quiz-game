@@ -175,9 +175,9 @@ class Game extends React.Component {
               150
             </span>
           </div>
-          {!buttonClicked && (
+          {(
             <p
-              className={ `${colorTime(time)} m-auto font-bold text-2xl drop-shadow font-mono bg-gray-200 rounded-full w-10 h-10 p-2 flex justify-center items-center` }
+              className={ ` ${!buttonClicked ? 'visible' : 'invisible'} ${colorTime(time)} m-auto font-bold text-2xl drop-shadow font-mono bg-gray-200 rounded-full w-10 h-10 p-2 flex justify-center items-center` }
             >
               {time}
             </p>)}

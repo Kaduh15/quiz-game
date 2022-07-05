@@ -43,7 +43,7 @@ class Login extends React.Component {
   render() {
     const { name, email, isDisabeledButton, showConfig } = this.state;
     return (
-      <div className="gap-9 dark:bg-gray-800 flex flex-col justify-center items-center w-full min-h-screen">
+      <div className="gap-9 bg-gray-800 flex flex-col justify-center items-center w-full min-h-screen">
         <header className="flex flex-col items-center justify-center gap-4 text-white">
           <img src={ logo } className="w-72" alt="logo" />
           <p className="text-2xl font-bold">SUA VEZ</p>
