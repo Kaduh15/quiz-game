@@ -8,6 +8,7 @@ state={ dificuldade: 'todos',
   category: [],
   categoria: 'todos',
   tipo: 5,
+  save: false,
 
 }
 
@@ -40,19 +41,21 @@ handleButton =() => {
   dispatch(choseDifficulty({ dificuldade, tipo, categoria }));
 
   // history.push('/');
+  this.setState({ save: true });
+  setTimeout(() => this.setState({ save: false }), Number('1000'));
 }
 
 render() {
-  const { category, tipo } = this.state;
+  const { category, tipo, save } = this.state;
 
   if (category.lenght === 0) return (<div />);
 
   return (
-    <div className="bg-white dark:bg-gray-800">
+    <div className="bg-gray-800">
       <h1 className="text-white text-6xl" data-testid="settings-title">
         Config
       </h1>
-      <div className="flex flex-col dark:flex-row rounded bg-gray-500 p-8 gap-4">
+      <div className="flex rounded bg-gray-500 p-8 gap-4">
         <label htmlFor="dificuldade">
           <select onChange={ this.handleChange } id="dificuldade" name="dificuldade">
             <option hidden>Dificuldade</option>
@@ -92,7 +95,13 @@ render() {
           Salvar
         </button>
       </div>
+      {save
+      && (<div className="p-2 mb-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800 absolute top-10 right-10" role="alert">
+        {' '}
+        <span className="font-medium">Salvo com sucesso</span>
 
+          </div>
+      )}
     </div>
 
   );
